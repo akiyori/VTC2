@@ -46,9 +46,16 @@ void Graphics::DrawRectangle(float x1, float y1, float x2, float y2, float r, fl
 	renderTarget->FillRectangle(rect, brush.Get());
 }
 
+void Graphics::DrawCircle(D2D1_ELLIPSE ellipse, D2D1::ColorF color)
+{
+	brush->SetColor(color);
+	renderTarget->DrawEllipse(ellipse, brush.Get());
+}
+void Graphics::DrawCircle(Point position, float radius, D2D1::ColorF color)
+{
+	DrawCircle(D2D1::Ellipse(D2D1::Point2F(position.x, position.y), radius, radius), color);
+}
 void Graphics::DrawCircle(float x, float y, float radius, float r, float g, float b, float a)
 {	
-	brush->SetColor(D2D1::ColorF(r, g, b, a));
-	D2D1_ELLIPSE ellipse = D2D1::Ellipse(D2D1::Point2F(x, y), radius, radius);
-	renderTarget->DrawEllipse(ellipse, brush.Get());
+	DrawCircle(D2D1::Ellipse(D2D1::Point2F(x, y), radius, radius), D2D1::ColorF(r, g, b, a));
 }

@@ -19,11 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="character.cpp" />
+    <ClCompile Include="character_manager.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="graphics.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="character.h" />
+    <ClInclude Include="character_attributes.h" />
+    <ClInclude Include="character_manager.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="graphics.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="point.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

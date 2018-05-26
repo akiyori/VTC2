@@ -2,6 +2,7 @@
 #include <tchar.h>
 
 #include "graphics.h"
+#include "game.h"
 
 #define WINDOW_CLASS	_T("VTC2")
 #define WINDOW_TITLE	WINDOW_CLASS
@@ -17,6 +18,7 @@ void Draw();
 const UINT	FrameCount = 2;
 
 Graphics* graphics;
+Game* game;
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCmdLine, int nCmdShow)
 {
@@ -56,12 +58,14 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCm
 		return -1;
 	}
 
+	game = new Game();
+	game->Start();
+
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
 
 	// メッセージループ
 	MSG	msg;
-
 	while (1) {
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 			if (msg.message == WM_QUIT) break;
@@ -103,21 +107,12 @@ void Draw()
 		count++;
 	}
 
-	graphics->BeginDraw();
-	//graphics->ClearScreen(0,0,1,0.1);
-	graphics->DrawRectangle(0,0, WINDOW_WIDTH, WINDOW_HEIGHT, 0,0,0,0.02);
+	game->Tick();
 
-	if (count % 10 == 1) {
-		int loopCount = rand() % 6;
-		for (int i = 0; i < loopCount; i++)
-		{
-			graphics->DrawCircle(rand() % WINDOW_WIDTH, rand() % WINDOW_HEIGHT, rand() % 100,
-				(rand() % 100) / 100.0f,
-				(rand() % 100) / 100.0f,
-				(rand() % 100) / 100.0f,
-				(rand() % 100) / 100.0f);
-		}
-	}
+	graphics->BeginDraw();
+	graphics->ClearScreen(0,0,0,1);
+
+	game->Render(graphics);
 
 	graphics->EndDraw();
 }

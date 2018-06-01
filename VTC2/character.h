@@ -10,6 +10,7 @@ class Character
 {
 public:
 	int affiliationId;
+	int partyId;
 	bool alive;
 	std::string name;
 	CharacterAttributes maxAttributes;

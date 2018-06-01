@@ -2,7 +2,8 @@
 #include <tchar.h>
 
 #include "graphics.h"
-#include "game.h"
+#include "game_controller.h"
+#include "Level1.h"
 
 #define WINDOW_CLASS	_T("VTC2")
 #define WINDOW_TITLE	WINDOW_CLASS
@@ -18,7 +19,7 @@ void Draw();
 const UINT	FrameCount = 2;
 
 Graphics* graphics;
-Game* game;
+GameController* gameController;
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCmdLine, int nCmdShow)
 {
@@ -58,8 +59,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCm
 		return -1;
 	}
 
-	game = new Game();
-	game->Start();
+	GameLevel::Init(graphics);
+	GameController::Init();
+	GameController::LoadInitialLevel(new Level1());
 
 	ShowWindow(hWnd, SW_SHOW);
 	UpdateWindow(hWnd);
@@ -69,7 +71,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCm
 	while (1) {
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
 			if (msg.message == WM_QUIT) break;
-
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
@@ -97,22 +98,15 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 
 	return 0;
 }
-int count = 0;
+
 void Draw()
 {
-	if (count > 60) {
-		count = 0;
-	}
-	else {
-		count++;
-	}
-
-	game->Tick();
+	GameController::Update();
 
 	graphics->BeginDraw();
-	graphics->ClearScreen(0,0,0,1);
+	graphics->ClearScreen(0, 0, 0, 1);
 
-	game->Render(graphics);
+	GameController::Render();
 
 	graphics->EndDraw();
 }

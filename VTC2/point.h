@@ -16,6 +16,15 @@ public:
 		y = y0;
 	}
 
+	bool operator == (const Point& p0) const
+	{
+		return (x == p0.x) && (y == p0.y);
+	}	
+	bool operator != (const Point& p0) const
+	{
+		return (x != p0.x) || (y != p0.y);
+	}
+
 	Point operator + (const Point& p0) const
 	{
 		Point p1;

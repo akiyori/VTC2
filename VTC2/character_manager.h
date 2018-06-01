@@ -14,6 +14,6 @@ public:
 	CharacterManager();
 	~CharacterManager();
 
-	void Action();
+	void Update(double timeTotal, double timeDelta);
 	void Render(Graphics* graphics);
 };

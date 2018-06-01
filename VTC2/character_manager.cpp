@@ -4,7 +4,7 @@
 
 CharacterManager::CharacterManager()
 {
-	for (int i = 0; i < 200; i++) {
+	for (int i = 0; i < 100; i++) {
 		characters.push_back(new Character(0));
 		characters.push_back(new Character(1));
 	}
@@ -16,24 +16,28 @@ CharacterManager::~CharacterManager()
 
 void CharacterManager::Update(double timeTotal, double timeDelta)
 {
-	for (Character* character : characters) {
-		std::vector<Character*> targetInSight = {};
-		for (Character* target : characters) {
-			if (character->sightRange >= Point::Distance(character->position, target->position)) {
-				targetInSight.push_back(target);
-			}
-		}
-		character->Action(targetInSight);
+	{
+		StopWatch<std::chrono::milliseconds> sw;
 
-		//std::thread t1([&targetInSight](std::vector<Character*> characters, Character* character) {
-		//	for (Character* target : characters) {
-		//		if (character->sightRange >= Point::Distance(character->position, target->position)) {
-		//			targetInSight.push_back(target);
-		//		}
-		//	}
-		//	character->Action(targetInSight);
-		//}, characters, character);
-		//t1.join();
+		for (Character* character : characters) {
+			std::vector<Character*> targetInSight = {};
+			for (Character* target : characters) {
+				if (character->sightRange >= Point::Distance(character->position, target->position)) {
+					targetInSight.push_back(target);
+				}
+			}
+			character->Action(targetInSight, timeDelta);
+
+			//std::thread t1([&targetInSight](std::vector<Character*> characters, Character* character) {
+			//	for (Character* target : characters) {
+			//		if (character->sightRange >= Point::Distance(character->position, target->position)) {
+			//			targetInSight.push_back(target);
+			//		}
+			//	}
+			//	character->Action(targetInSight);
+			//}, characters, character);
+			//t1.join();
+		}
 	}
 }
 

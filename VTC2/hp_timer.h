@@ -22,7 +22,7 @@ public:
 
 	void Reset() {
 		LARGE_INTEGER t;
-		QueryPerformanceFrequency(&t);
+		QueryPerformanceCounter(&t);
 		startTime = t.QuadPart;
 		currentCallToUpdate = t.QuadPart;
 		lastCallToUpdate = t.QuadPart;
@@ -31,7 +31,7 @@ public:
 	void Update() {
 		lastCallToUpdate = currentCallToUpdate;
 		LARGE_INTEGER t;
-		QueryPerformanceFrequency(&t);
+		QueryPerformanceCounter(&t);
 		currentCallToUpdate = t.QuadPart;
 	}
 

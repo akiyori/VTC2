@@ -28,5 +28,5 @@ public:
 	void AttackMultiple(std::vector<Character*> targets);
 	void OnAttacked(Character* attacker);
 	void OnDead();
-	void Action(std::vector<Character*> targets);
+	void Action(std::vector<Character*> targets, double timeDelta);
 };

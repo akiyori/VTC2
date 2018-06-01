@@ -13,7 +13,7 @@ Character::Character(int affiliationId)
 	destination.x = (1-affiliationId) * 500;
 	destination.y = (1-affiliationId) * 500;
 	sightRange = 200;
-	speed = 2;
+	speed = 60;
 }
 
 Character::~Character()
@@ -45,7 +45,7 @@ void Character::OnDead()
 	alive = false;
 }
 
-void Character::Action(std::vector<Character*> targets)
+void Character::Action(std::vector<Character*> targets, double timeDelta)
 {
 	if (!alive) return;
 	characterInSight = targets;
@@ -62,7 +62,7 @@ void Character::Action(std::vector<Character*> targets)
 		destination = target->position;
 
 	if (position != destination) {
-		double rate = (double)speed / Point::Distance(position, destination);
+		double rate = (double)speed / Point::Distance(position, destination) * timeDelta;
 		if (rate < 1) 
 		{
 			position += (destination - position) * rate;

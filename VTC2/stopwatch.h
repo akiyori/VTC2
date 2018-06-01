@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <iostream>
+#include "spdlog/spdlog.h"
 
 namespace detail
 {
@@ -30,7 +31,6 @@ class StopWatch final
 
 private:
 	time_point start_;
-	std::ostream *out_;
 
 	void start()
 	{
@@ -38,13 +38,6 @@ private:
 	}
 public:
 	StopWatch()
-		: out_(&std::cout)
-	{
-		start();
-	}
-
-	StopWatch(std::ostream &out)
-		: out_(&out)
 	{
 		start();
 	}
@@ -52,12 +45,9 @@ public:
 	~StopWatch()
 	{
 		const time_point end = std::chrono::system_clock::now();
-		//(*out_)
-		//	<< "elapsed time: "
-		//	<< std::chrono::duration_cast<Prec>(end - start_).count()
-		//	<< " ["
-		//	<< detail::chrono::UnitName<Prec>::name
-		//	<< "]"
-		//	<< std::endl;
+		auto time = std::chrono::duration_cast<Prec>(end - start_).count();
+		auto unit = detail::chrono::UnitName<Prec>::name;
+		auto logger = spdlog::get("async_file_logger");
+		logger->info("elapsed time: {} [{}]", time, unit);
 	}
 };

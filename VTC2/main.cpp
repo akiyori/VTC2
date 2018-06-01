@@ -4,6 +4,7 @@
 #include "graphics.h"
 #include "game_controller.h"
 #include "Level1.h"
+#include "spdlog/spdlog.h"
 
 #define WINDOW_CLASS	_T("VTC2")
 #define WINDOW_TITLE	WINDOW_CLASS
@@ -15,8 +16,6 @@
 // ウィンドウプロシージャ
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
 void Draw();
-
-const UINT	FrameCount = 2;
 
 Graphics* graphics;
 GameController* gameController;
@@ -59,6 +58,10 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCm
 		return -1;
 	}
 
+	spdlog::set_pattern("[%H:%M:%S] %v");
+	spdlog::set_async_mode(4096);
+	auto asyncLogger = spdlog::basic_logger_st("async_file_logger", "logs/async_log.txt");
+
 	GameLevel::Init(graphics);
 	GameController::Init();
 	GameController::LoadInitialLevel(new Level1());
@@ -91,6 +94,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
+		spdlog::drop_all();
 		break;
 	default:
 		return DefWindowProc(hWnd, nMsg, wParam, lParam);

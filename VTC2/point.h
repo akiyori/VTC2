@@ -147,4 +147,15 @@ public:
 		diff.y = (diff.y > 0) - (diff.y < 0);
 		return diff;
 	}
+
+	void FitRange(Point* start, Point* end) {
+		if (x < start->x)
+			x = start->x;
+		if (y < start->y)
+			y = start->y;
+		if (x > end->x)
+			x = end->x;
+		if (y > end->y)
+			y = end->y;
+	}
 };

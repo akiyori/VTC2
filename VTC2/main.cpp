@@ -52,16 +52,19 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, TCHAR *lpszCm
 		hInstance,
 		NULL);
 
+	// •`‰æƒNƒ‰ƒX‰Šú‰»
 	graphics = new Graphics();
 	if (!graphics->Init(hWnd)) {
 		delete graphics;
 		return -1;
 	}
 
+	// Logger‰Šú‰»
 	spdlog::set_pattern("[%H:%M:%S] %v");
 	spdlog::set_async_mode(4096);
 	auto asyncLogger = spdlog::basic_logger_st("async_file_logger", "logs/async_log.txt");
 
+	// ƒQ[ƒ€‰Šú‰»
 	GameLevel::Init(graphics);
 	GameController::Init();
 	GameController::LoadInitialLevel(new Level1());

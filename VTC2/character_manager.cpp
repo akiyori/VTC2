@@ -38,5 +38,6 @@ void CharacterManager::Render(Graphics* graphics)
 {
 	for (Character* character : allCharacters) {
 		graphics->DrawCircle(character->position, 4, D2D1::ColorF(character->affiliationId, 0, 1-character->affiliationId, character->alive?1:0.2));
+		graphics->DrawTextVTC(std::to_string(character->partyId), character->position, D2D1::ColorF(1, 1, 1, character->alive ? 1 : 0.2));
 	}
 }

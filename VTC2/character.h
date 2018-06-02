@@ -9,6 +9,7 @@
 class Character
 {
 public:
+	int id;
 	int affiliationId;
 	int partyId;
 	bool alive;
@@ -21,7 +22,7 @@ public:
 	int sightRange;
 	std::vector<Character*> characterInSight;
 
-	Character(int affiliationId);
+	Character(int affiliationId, int partyId);
 	~Character();
 
 	void Attack(Character* target);

@@ -1,15 +1,16 @@
 #include "character.h"
+#include "game_setting.h"
 
-Character::Character(int affiliationId)
+Character::Character(int affiliationId, int partyId)
 {
 	this->affiliationId = affiliationId;
-	this->partyId = 1;
+	this->partyId = partyId;
 	alive = true;
 	maxAttributes.health = 10;
 	maxAttributes.strength = 1;
 	currentAttributes = maxAttributes;
-	position.x = affiliationId * 500 + rand() % 50;
-	position.y = affiliationId * 500 + rand() % 50;
+	position.x = rand() % GameSetting::MAP_WIDTH;
+	position.y = rand() % GameSetting::MAP_HEIGHT;
 	destination.x = (1-affiliationId) * 500;
 	destination.y = (1-affiliationId) * 500;
 	sightRange = 200;
@@ -74,7 +75,8 @@ void Character::Action(std::vector<Character*> targets, double timeDelta)
 	}
 	else 
 	{
-		destination.x += (rand() % 100)-50;
+		destination.x += (rand() % 100) - 50;
 		destination.y += (rand() % 100) - 50;
+		destination.FitRange(new Point(0,0), new Point(GameSetting::MAP_WIDTH, GameSetting::MAP_HEIGHT));
 	}
 }

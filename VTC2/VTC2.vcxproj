@@ -26,6 +26,8 @@
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="organization.cpp" />
+    <ClCompile Include="party.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -34,9 +36,12 @@
     <ClInclude Include="game_level.h" />
     <ClInclude Include="game_controller.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="game_setting.h" />
     <ClInclude Include="hp_timer.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="organization.h" />
+    <ClInclude Include="party.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="stopwatch.h" />
   </ItemGroup>

@@ -1,23 +1,26 @@
 #include "Level1.h"
+#include "character_manager.h"
 
 void Level1::Load()
 {
-	characterManager = new CharacterManager();
+	auto o1 = new Organization(0, "blue");
+	auto o2 = new Organization(1, "red");
+	organizations.push_back(o1);
+	organizations.push_back(o2);
 }
 
 void Level1::Unload()
 {
-	delete characterManager;
 }
 
 void Level1::Update(double timeTotal, double timeDelta)
 {
-	characterManager->Update(timeTotal, timeDelta);
+	CharacterManager::Update(timeTotal, timeDelta);
 }
 
 void Level1::Render()
 {
-	characterManager->Render(graphics);
+	CharacterManager::Render(graphics);
 }
 
 

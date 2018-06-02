@@ -1,11 +1,12 @@
 #pragma once
 
+#include <vector>
 #include "game_level.h"
-#include "character_manager.h"
+#include "organization.h"
 
 class Level1 : public GameLevel
 {
-	CharacterManager* characterManager;
+	std::vector<Organization*> organizations;
 public:
 	virtual void Load() override;
 	virtual void Unload() override;

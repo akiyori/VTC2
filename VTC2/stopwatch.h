@@ -31,14 +31,16 @@ class StopWatch final
 
 private:
 	time_point start_;
+	std::string message;
 
 	void start()
 	{
 		start_ = std::chrono::system_clock::now();
 	}
 public:
-	StopWatch()
+	StopWatch(std::string message)
 	{
+		this->message = message;
 		start();
 	}
 
@@ -48,6 +50,6 @@ public:
 		auto time = std::chrono::duration_cast<Prec>(end - start_).count();
 		auto unit = detail::chrono::UnitName<Prec>::name;
 		auto logger = spdlog::get("async_file_logger");
-		logger->info("elapsed time: {} [{}]", time, unit);
+		logger->info("[{}] : {} [{}]", message, time, unit);
 	}
 };

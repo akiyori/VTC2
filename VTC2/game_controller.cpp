@@ -33,7 +33,6 @@ void GameController::SwitchLevel(GameLevel * level)
 void GameController::Render()
 {
 	if (loading) return;
-	hpTimer->WaitFrame();
 	currentLevel->Render();
 }
 

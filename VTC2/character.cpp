@@ -6,13 +6,13 @@ Character::Character(int affiliationId, int partyId)
 	this->affiliationId = affiliationId;
 	this->partyId = partyId;
 	alive = true;
-	maxAttributes.health = 10;
+	maxAttributes.health = 100;
 	maxAttributes.strength = 1;
 	currentAttributes = maxAttributes;
-	position.x = rand() % GameSetting::MAP_WIDTH;
-	position.y = rand() % GameSetting::MAP_HEIGHT;
-	destination.x = (1-affiliationId) * 500;
-	destination.y = (1-affiliationId) * 500;
+	position.x = (float)(rand() % GameSetting::MAP_WIDTH);
+	position.y = (float)(rand() % GameSetting::MAP_HEIGHT);
+	destination.x = (float)(1-affiliationId) * 500;
+	destination.y = (float)(1-affiliationId) * 500;
 	sightRange = 200;
 	speed = 60;
 }
@@ -63,10 +63,10 @@ void Character::Action(std::vector<Character*> targets, double timeDelta)
 		destination = target->position;
 
 	if (position != destination) {
-		double rate = (double)speed / Point::Distance(position, destination) * timeDelta;
+		auto rate = speed / Point::Distance(position, destination) * timeDelta;
 		if (rate < 1) 
 		{
-			position += (destination - position) * rate;
+			position += (destination - position) * (float)rate;
 		}
 		else 
 		{
@@ -77,6 +77,6 @@ void Character::Action(std::vector<Character*> targets, double timeDelta)
 	{
 		destination.x += (rand() % 100) - 50;
 		destination.y += (rand() % 100) - 50;
-		destination.FitRange(new Point(0,0), new Point(GameSetting::MAP_WIDTH, GameSetting::MAP_HEIGHT));
+		destination.FitRange(new Point(0,0), new Point((float)GameSetting::MAP_WIDTH, (float)GameSetting::MAP_HEIGHT));
 	}
 }

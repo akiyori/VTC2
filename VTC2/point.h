@@ -5,12 +5,12 @@
 class Point
 {
 public:
-	int x;
-	int y;
+	float x;
+	float y;
 
 	Point() {}    // ‰Šú‰»‚Í‰½‚à‚µ‚È‚¢
 
-	Point(int x0, int y0)
+	Point(float x0, float y0)
 	{
 		x = x0;
 		y = y0;
@@ -79,76 +79,75 @@ public:
 		return *this;
 	}
 
-	Point operator + (const double& value) const
+	Point operator + (float value) const
 	{
 		Point p1;
-		p1.x = (int)(x + value);
-		p1.y = (int)(y + value);
+		p1.x = x + value;
+		p1.y = y + value;
 		return p1;
 	}
-	Point operator - (const double& value) const
+	Point operator - (float value) const
 	{
 		Point p1;
-		p1.x = (int)(x - value);
-		p1.y = (int)(y - value);
+		p1.x = x - value;
+		p1.y = y - value;
 		return p1;
 	}
-	Point operator * (const double& value) const
+	Point operator * (float value) const
 	{
 		Point p1;
-		p1.x = (int)(x * value);
-		p1.y = (int)(y * value);
+		p1.x = x * value;
+		p1.y = y * value;
 		return p1;
 	}
-	Point operator / (const double& value) const
+	Point operator / (float value) const
 	{
 		Point p1;
-		p1.x = (int)(x / value);
-		p1.y = (int)(y / value);
+		p1.x = x / value;
+		p1.y = y / value;
 		return p1;
 	}
 
-	Point& operator += (double& value)
+	Point& operator += (float value)
 	{
-		x = (int)(x + value);
-		y = (int)(y + value);
+		x += value;
+		y += value;
 		return *this;
 	}
-	Point& operator -= (double& value)
+	Point& operator -= (float value)
 	{
-		x = (int)(x - value);
-		y = (int)(y - value);
+		x -= value;
+		y -= value;
 		return *this;
 	}
-	Point& operator *= (double& value)
+	Point& operator *= (float value)
 	{
-		x = (int)(x * value);
-		y = (int)(y * value);
+		x *= value;
+		y *= value;
 		return *this;
 	}
-	Point& operator /= (double& value)
+	Point& operator /= (float value)
 	{
-		x = (int)(x / value);
-		y = (int)(y / value);
+		x /= value;
+		y /= value;
 		return *this;
 	}
 
 
-	static double Distance(Point& from, Point& to)
+	static float Distance(const Point& from, const Point& to)
 	{
 		Point diff = to - from;
 		return std::sqrt(std::pow(diff.x, 2) + std::pow(diff.y, 2));
 	}
 
-	static Point Direction(Point& from, Point& to)
+	static Point Direction(const Point& from, const Point& to)
 	{
+		auto distance = Distance(from, to);
 		Point diff = to - from;
-		diff.x = (diff.x > 0) - (diff.x < 0);
-		diff.y = (diff.y > 0) - (diff.y < 0);
-		return diff;
+		return diff /= distance;
 	}
 
-	void FitRange(Point* start, Point* end) {
+	void FitRange(const Point* start, const Point* end) {
 		if (x < start->x)
 			x = start->x;
 		if (y < start->y)

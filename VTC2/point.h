@@ -1,6 +1,8 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
 #include <cmath>
+#include <math.h>
 
 class Point
 {
@@ -145,6 +147,14 @@ public:
 		auto distance = Distance(from, to);
 		Point diff = to - from;
 		return diff /= distance;
+	}
+
+	static Point Rotate(const Point& from, double degree) {
+		Point to;
+		double radian = degree * M_PI / 180.0;
+		to.x = (float)(from.x * std::cosf(radian) - from.y * std::sinf(radian));
+		to.y = (float)(from.x * std::sinf(radian) + from.y * std::cosf(radian));
+		return to;
 	}
 
 	void FitRange(const Point* start, const Point* end) {

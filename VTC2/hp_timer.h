@@ -36,12 +36,12 @@ public:
 	}
 
 	double GetTimeTotal() {
-		double d = currentCallToUpdate - startTime;
+		double d = static_cast<double>(currentCallToUpdate - startTime);
 		return d / frequency;
 	}
 
 	double GetTimeDelta() {
-		double d = currentCallToUpdate - lastCallToUpdate;
+		double d = static_cast<double>(currentCallToUpdate - lastCallToUpdate);
 		return d / frequency;
 	}
 

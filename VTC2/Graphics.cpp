@@ -66,7 +66,7 @@ void Graphics::DrawCircle(D2D1_ELLIPSE ellipse, D2D1::ColorF color)
 }
 void Graphics::DrawCircle(Point position, float radius, D2D1::ColorF color)
 {
-	DrawCircle(D2D1::Ellipse(D2D1::Point2F(position.x, position.y), radius, radius), color);
+	DrawCircle(D2D1::Ellipse(D2D1::Point2F((float)position.x, (float)position.y), radius, radius), color);
 }
 void Graphics::DrawCircle(float x, float y, float radius, float r, float g, float b, float a)
 {	
@@ -78,10 +78,10 @@ void Graphics::DrawTextVTC(const std::string &text, Point position, D2D1::ColorF
 	brush->SetColor(color);
 	auto wstext = Utf8ToWString(text);
 	auto size = renderTarget.Get()->GetSize();
-	auto rect = D2D1::RectF(position.x-3, position.y-5, size.width, size.height);
+	auto rect = D2D1::RectF((float)position.x-3, (float)position.y-5, size.width, size.height);
 	renderTarget->DrawText(
 		  wstext.c_str()   // •¶š—ñ
-		, wstext.size()    // •¶š”
+		, (UINT)wstext.size()    // •¶š”
 		, textFormat.Get()
 		, rect
 		, brush.Get()

@@ -82,59 +82,59 @@ public:
 	Point operator + (const double& value) const
 	{
 		Point p1;
-		p1.x = x + value;
-		p1.y = y + value;
+		p1.x = (int)(x + value);
+		p1.y = (int)(y + value);
 		return p1;
 	}
 	Point operator - (const double& value) const
 	{
 		Point p1;
-		p1.x = x - value;
-		p1.y = y - value;
+		p1.x = (int)(x - value);
+		p1.y = (int)(y - value);
 		return p1;
 	}
 	Point operator * (const double& value) const
 	{
 		Point p1;
-		p1.x = x * value;
-		p1.y = y * value;
+		p1.x = (int)(x * value);
+		p1.y = (int)(y * value);
 		return p1;
 	}
 	Point operator / (const double& value) const
 	{
 		Point p1;
-		p1.x = x / value;
-		p1.y = y / value;
+		p1.x = (int)(x / value);
+		p1.y = (int)(y / value);
 		return p1;
 	}
 
 	Point& operator += (double& value)
 	{
-		x += value;
-		y += value;
+		x = (int)(x + value);
+		y = (int)(y + value);
 		return *this;
 	}
 	Point& operator -= (double& value)
 	{
-		x -= value;
-		y -= value;
+		x = (int)(x - value);
+		y = (int)(y - value);
 		return *this;
 	}
 	Point& operator *= (double& value)
 	{
-		x *= value;
-		y *= value;
+		x = (int)(x * value);
+		y = (int)(y * value);
 		return *this;
 	}
 	Point& operator /= (double& value)
 	{
-		x /= value;
-		y /= value;
+		x = (int)(x / value);
+		y = (int)(y / value);
 		return *this;
 	}
 
 
-	static int Distance(Point& from, Point& to)
+	static double Distance(Point& from, Point& to)
 	{
 		Point diff = to - from;
 		return std::sqrt(std::pow(diff.x, 2) + std::pow(diff.y, 2));

@@ -1,5 +1,4 @@
 #include "Level1.h"
-#include "character_manager.h"
 
 void Level1::Load()
 {
@@ -18,9 +17,10 @@ void Level1::Update(double timeTotal, double timeDelta)
 	CharacterManager::Update(timeTotal, timeDelta);
 }
 
-void Level1::Render()
+void Level1::Render(double frameRate)
 {
 	CharacterManager::Render(graphics);
+	graphics->DrawTextFrameRate(frameRate);
 }
 
 

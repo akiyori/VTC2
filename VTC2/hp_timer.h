@@ -10,12 +10,28 @@ class HPTimer {
 	long long lastCallToUpdate;
 	long long currentCallToUpdate;
 	long long frequency;
+	double secondsTimer;
+	unsigned int frames = 0;
+	
+	void UpdateFrameRate() {
+		frames++;
+		secondsTimer += GetTimeDelta();
+		if (secondsTimer > 1) {
+			frameRate = (double)frames*0.5 + frameRate*0.5; //more stable
+			frames = 0;
+			secondsTimer = 0;
+		}
+	}
 
 public:
+	double  frameRate = 30;
+
 	HPTimer() {
 		LARGE_INTEGER t;
 		QueryPerformanceFrequency(&t);
 		frequency = t.QuadPart;
+
+		secondsTimer = 0;
 
 		Reset();
 	}
@@ -33,6 +49,8 @@ public:
 		LARGE_INTEGER t;
 		QueryPerformanceCounter(&t);
 		currentCallToUpdate = t.QuadPart;
+
+		UpdateFrameRate();
 	}
 
 	double GetTimeTotal() {

@@ -80,8 +80,24 @@ void Graphics::DrawTextVTC(const std::string &text, Point position, D2D1::ColorF
 	auto size = renderTarget.Get()->GetSize();
 	auto rect = D2D1::RectF((float)position.x-3, (float)position.y-5, size.width, size.height);
 	renderTarget->DrawText(
-		  wstext.c_str()   // •¶Žš—ñ
-		, (UINT)wstext.size()    // •¶Žš”
+		  wstext.c_str()
+		, (UINT)wstext.size()
+		, textFormat.Get()
+		, rect
+		, brush.Get()
+		, D2D1_DRAW_TEXT_OPTIONS_NONE
+	);
+}
+
+void Graphics::DrawTextFrameRate(double frameRate)
+{
+	brush->SetColor(D2D1::ColorF(1, 1, 0));
+	auto wstext = std::to_wstring(frameRate);
+	auto size = renderTarget.Get()->GetSize();
+	auto rect = D2D1::RectF(0, 0, size.width, size.height);
+	renderTarget->DrawText(
+		wstext.c_str()
+		, (UINT)wstext.size()
 		, textFormat.Get()
 		, rect
 		, brush.Get()

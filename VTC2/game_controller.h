@@ -3,8 +3,6 @@
 #include <random>
 
 #include "game_level.h"
-#include "graphics.h"
-#include "character_manager.h"
 #include "hp_timer.h"
 
 class GameController

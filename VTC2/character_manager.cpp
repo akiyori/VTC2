@@ -22,11 +22,15 @@ void CharacterManager::Update(double timeTotal, double timeDelta)
 		StopWatch<std::chrono::milliseconds> sw("serch target");
 
 		for (Character* character : allCharacters) {
+			if (!character->alive) continue;
 			std::vector<Character*> targetInSight = {};
 			targetInSight.reserve(300);
 			for (Character* target : allCharacters) {
-				if (character->sightRange >= Point::Distance(character->position, target->position)) {
-					targetInSight.push_back(target);
+				if (character != target && target->alive && character->sightRange >= Point::Distance(character->position, target->position)) {
+					auto pos = std::find_if(targetInSight.begin(), targetInSight.end(), [target,character](auto c) {
+						return Point::Distance(character->position, c->position) > Point::Distance(character->position, target->position);
+					});
+					targetInSight.insert(pos, target);
 				}
 			}
 			character->Action(targetInSight, timeDelta);

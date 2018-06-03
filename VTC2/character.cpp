@@ -9,10 +9,6 @@ Character::Character(int affiliationId, int partyId)
 	maxAttributes.health = 100;
 	maxAttributes.strength = 1;
 	currentAttributes = maxAttributes;
-	position.x = (float)(rand() % GameSetting::MAP_WIDTH);
-	position.y = (float)(rand() % GameSetting::MAP_HEIGHT);
-	destination.x = (float)(1-affiliationId) * 500;
-	destination.y = (float)(1-affiliationId) * 500;
 	sightRange = 200;
 	speed = 60;
 }

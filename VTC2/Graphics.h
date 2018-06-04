@@ -34,6 +34,7 @@ public:
 
 	void ClearScreen(float r, float g, float b, float a);
 	void DrawRectangle(float x1, float y1, float x2, float y2, float r, float g, float b, float a);
+	void FillRectangle(Point start, Point end, float r, float g, float b, float a);
 	void DrawCircle(D2D1_ELLIPSE ellipse, D2D1::ColorF color);
 	void DrawCircle(Point position, float radius, D2D1::ColorF color);
 	void DrawCircle(float x, float y, float radius, float r, float g, float b, float a);

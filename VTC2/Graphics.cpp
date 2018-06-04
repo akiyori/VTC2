@@ -56,6 +56,13 @@ void Graphics::DrawRectangle(float x1, float y1, float x2, float y2, float r, fl
 {
 	brush->SetColor(D2D1::ColorF(r, g, b, a));
 	auto rect = D2D1::RectF(x1, y1, x2, y2);
+	renderTarget->DrawRectangle(rect, brush.Get());
+}
+
+void Graphics::FillRectangle(Point start, Point end, float r, float g, float b, float a)
+{
+	brush->SetColor(D2D1::ColorF(r, g, b, a));
+	auto rect = D2D1::RectF(start.x, start.y, end.x, end.y);
 	renderTarget->FillRectangle(rect, brush.Get());
 }
 

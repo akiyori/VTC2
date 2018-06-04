@@ -68,5 +68,13 @@ void CharacterManager::Render(Graphics* graphics)
 			, character->position
 			, D2D1::ColorF(1, 1, 1, character->alive ? 1 : 0.2f)
 		);
+		if (character->alive) {
+			Point start = character->position + Point::Rotate(Point(0, -1), -60) * 6;
+			Point end = character->position + Point::Rotate(Point(0, -1), 60) * 6;
+			end.y += 2;
+			graphics->FillRectangle(start, end, 1,0,0,1);
+			auto width = (end.x - start.x) * ((float)character->currentAttributes.health / character->maxAttributes.health);
+			graphics->FillRectangle(start, Point(start.x + width, end.y), 0, 1, 0, 1);
+		}
 	}
 }

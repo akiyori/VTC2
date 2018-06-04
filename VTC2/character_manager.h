@@ -10,7 +10,8 @@ class CharacterManager
 {
 public:
 	static std::vector<Character*> allCharacters;
-
+	static const int MAP_SIZE = 1280;
+	static std::vector<std::vector<int>> map;
 	int id;
 	std::string name;
 	std::vector<Character*> members;

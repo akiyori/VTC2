@@ -5,11 +5,13 @@
 #include "spdlog/spdlog.h"
 
 std::vector<Character*> CharacterManager::allCharacters;
+std::vector<std::vector<int>> CharacterManager::map;
 
 CharacterManager::CharacterManager(int id, const std::string &name)
 {
 	this->id = id;
 	this->name = name;
+	map = std::vector<std::vector<int>>(MAP_SIZE, std::vector<int>(MAP_SIZE, -1));
 }
 
 CharacterManager::~CharacterManager()
@@ -18,6 +20,21 @@ CharacterManager::~CharacterManager()
 
 void CharacterManager::Update(double timeTotal, double timeDelta)
 {
+	{
+		StopWatch<std::chrono::milliseconds> sw("reset map");
+
+		for (auto& row : map) {
+			std::fill(row.begin(), row.end(), -1);
+		}
+	}
+	{
+		StopWatch<std::chrono::milliseconds> sw("create map");
+
+		for (size_t i = 0, n = allCharacters.size(); i < n; ++i) {
+			auto* character = allCharacters[i];
+			map[(int)character->position.x][(int)character->position.y] = i;
+		}
+	}
 	{
 		StopWatch<std::chrono::milliseconds> sw("serch target");
 

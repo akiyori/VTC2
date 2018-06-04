@@ -144,8 +144,10 @@ public:
 
 	static Point Direction(const Point& from, const Point& to)
 	{
-		auto distance = Distance(from, to);
 		Point diff = to - from;
+		if (diff.x == 0 && diff.y == 0)
+			return Point(0,0);
+		auto distance = Distance(from, to);
 		return diff /= distance;
 	}
 
@@ -155,6 +157,10 @@ public:
 		to.x = (float)(from.x * std::cosf(radian) - from.y * std::sinf(radian));
 		to.y = (float)(from.x * std::sinf(radian) + from.y * std::cosf(radian));
 		return to;
+	}
+
+	static bool IntEqual(const Point& from, const Point& to) {
+		return (int)from.x == (int)to.x && (int)from.y == (int)to.y;
 	}
 
 	void FitRange(const Point* start, const Point* end) {

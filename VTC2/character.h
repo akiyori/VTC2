@@ -21,6 +21,7 @@ public:
 	int speed;
 	int sightRange;
 	std::vector<Character*> characterInSight;
+	bool selected;
 
 	Character(int affiliationId, int partyId);
 	~Character();

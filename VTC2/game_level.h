@@ -1,6 +1,7 @@
 #pragma once
 
 #include "graphics.h"
+#include "input.h"
 
 class GameLevel
 {

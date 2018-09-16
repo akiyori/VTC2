@@ -23,4 +23,5 @@ public:
 
 	static void Update(double timeTotal, double timeDelta);
 	static void Render(Graphics* graphics);
+	static void ToggleSelection(Point point);
 };

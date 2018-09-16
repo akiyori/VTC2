@@ -3,6 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <math.h>
+#include <string>
 
 class Point
 {
@@ -168,9 +169,13 @@ public:
 			x = start->x;
 		if (y < start->y)
 			y = start->y;
-		if (x > end->x)
-			x = end->x;
-		if (y > end->y)
-			y = end->y;
+		if (x >= end->x)
+			x = end->x-1;
+		if (y >= end->y)
+			y = end->y-1;
+	}
+
+	const std::string ToString() {
+		return std::to_string((int)x) + ',' + std::to_string((int)y);
 	}
 };

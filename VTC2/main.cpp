@@ -4,6 +4,7 @@
 #include "graphics.h"
 #include "game_controller.h"
 #include "Level1.h"
+#include "input.h"
 #include "spdlog/spdlog.h"
 
 #define WINDOW_CLASS	_T("VTC2")
@@ -94,6 +95,12 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		// •`‰æ
 		Draw();
+		break;
+	case WM_LBUTTONUP:
+		Input::clickPoint = Point(LOWORD(lParam), HIWORD(lParam));
+		break;
+	case WM_CHAR:
+		Input::inputKey = (TCHAR)wParam;
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);

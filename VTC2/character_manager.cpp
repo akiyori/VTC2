@@ -76,5 +76,24 @@ void CharacterManager::Render(Graphics* graphics)
 			auto width = (end.x - start.x) * ((float)character->currentAttributes.health / character->maxAttributes.health);
 			graphics->FillRectangle(start, Point(start.x + width, end.y), 0, 1, 0, 1);
 		}
+		if (character->selected) {
+			graphics->DrawRectangle(character->position - 10, character->position + 10, 1, 1, 0, 1);
+			graphics->DrawTextVTC(character->position.ToString(), character->position+10, D2D1::ColorF::Yellow);
+		}
 	}
+}
+
+void CharacterManager::ToggleSelection(Point point)
+{
+	int range = 10;
+	for(int x = 0; x < range; ++x)
+		for (int y = 0; y <range; ++y)
+		{
+			int value = map[point.x + x - range/2][point.y + y - range/2];
+			if (value != -1) {
+				auto character = allCharacters[value];
+				character->selected = !character->selected;
+				return;
+			}
+		}
 }

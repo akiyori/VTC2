@@ -54,19 +54,20 @@ void Character::Action(std::vector<Character*> targets, double timeDelta)
 		}
 	}
 
-	if (target != NULL) {
-		Attack(target);
-		destination = target->position;
-	}
-
 	if (!targets.empty()) {
 		if (Point::Distance(targets[0]->position, position) < 10) {
-			auto yaw = (Point::Direction(targets[0]->position, position) + Point::Rotate(Point::Direction(destination, position), 180))/2;
+			auto yaw = (Point::Direction(targets[0]->position, position) + Point::Rotate(Point::Direction(destination, position), 180)) / 2;
 			position += yaw * speed * timeDelta;
 			return;
 		}
 	}
 
+	if (target != NULL) {
+		Attack(target);
+		destination = target->position;
+		return;
+	}
+	
 	position += Point::Direction(position, destination) * speed * timeDelta;
 	if(Point::Distance(position, destination) < 1){
 		destination.x += (rand() % 100) - 50;

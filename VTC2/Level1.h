@@ -4,6 +4,7 @@
 #include "game_level.h"
 #include "organization.h"
 #include "character_manager.h"
+#include "rectangle.h"
 
 class Level1 : public GameLevel
 {

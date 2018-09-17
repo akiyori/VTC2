@@ -45,6 +45,7 @@
     <ClInclude Include="organization.h" />
     <ClInclude Include="party.h" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="rectangle.h" />
     <ClInclude Include="stopwatch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

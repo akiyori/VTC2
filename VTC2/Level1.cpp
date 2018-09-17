@@ -15,7 +15,8 @@ void Level1::Unload()
 void Level1::Update(double timeTotal, double timeDelta)
 {
 	if (Input::inputKey == ' ') {
-		Input::inputKey == 0;
+		Input::inputKey = 0;
+		CharacterManager::isDebugMode = !CharacterManager::isDebugMode;
 	}
 	if (Input::clickPoint != Point(0, 0)) {
 		CharacterManager::ToggleSelection(Input::clickPoint);

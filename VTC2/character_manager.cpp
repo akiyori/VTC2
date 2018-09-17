@@ -6,12 +6,14 @@
 
 std::vector<Character*> CharacterManager::allCharacters;
 std::vector<std::vector<int>> CharacterManager::map;
+bool CharacterManager::isDebugMode;
 
 CharacterManager::CharacterManager(int id, const std::string &name)
 {
 	this->id = id;
 	this->name = name;
 	map = std::vector<std::vector<int>>(MAP_SIZE, std::vector<int>(MAP_SIZE, -1));
+	this->isDebugMode = false;
 }
 
 CharacterManager::~CharacterManager()
@@ -69,14 +71,22 @@ void CharacterManager::Render(Graphics* graphics)
 			, D2D1::ColorF(1, 1, 1, character->alive ? 1 : 0.2f)
 		);
 		if (character->alive) {
+			// ‘Ì—Íƒo[
 			Point start = character->position + Point::Rotate(Point(0, -1), -60) * 6;
 			Point end = character->position + Point::Rotate(Point(0, -1), 60) * 6;
 			end.y += 2;
 			graphics->FillRectangle(start, end, 1,0,0,1);
 			auto width = (end.x - start.x) * ((float)character->currentAttributes.health / character->maxAttributes.health);
 			graphics->FillRectangle(start, Point(start.x + width, end.y), 0, 1, 0, 1);
+
+			if (isDebugMode) {
+				graphics->DrawCircle(character->position, character->sightRange, D2D1::ColorF::Aqua);
+				graphics->DrawCircle(character->position, character->attackRange, D2D1::ColorF::Orange);
+				graphics->DrawLine(character->position, character->destination, D2D1::ColorF::White);
+			}
 		}
-		if (character->selected) {
+
+		if(character->selected){
 			graphics->DrawRectangle(character->position - 10, character->position + 10, 1, 1, 0, 1);
 			graphics->DrawTextVTC(character->position.ToString(), character->position+10, D2D1::ColorF::Yellow);
 		}

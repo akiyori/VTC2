@@ -117,6 +117,12 @@ void Graphics::DrawTextFrameRate(double frameRate)
 	);
 }
 
+void Graphics::DrawLine(Point start, Point end, D2D1::ColorF color)
+{
+	brush->SetColor(color);
+	renderTarget->DrawLine(start.ToD2D1Point(), end.ToD2D1Point(), brush.Get());
+}
+
 std::wstring Graphics::Utf8ToWString(std::string utf8Text)
 {
 	// バッファサイズの取得

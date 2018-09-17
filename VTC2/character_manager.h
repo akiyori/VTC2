@@ -9,6 +9,7 @@
 class CharacterManager
 {
 public:
+	static bool isDebugMode;
 	static std::vector<Character*> allCharacters;
 	static const int MAP_SIZE = 1280;
 	static std::vector<std::vector<int>> map;

@@ -41,4 +41,5 @@ public:
 	void DrawCircle(float x, float y, float radius, float r, float g, float b, float a);
 	void DrawTextVTC(const std::string &text, Point position, D2D1::ColorF color);
 	void DrawTextFrameRate(double frameRate);
+	void DrawLine(Point start, Point end, D2D1::ColorF color);
 };

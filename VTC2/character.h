@@ -9,6 +9,12 @@
 class Character
 {
 public:
+	static enum Status {
+		Chase,
+		Battle,
+		Escape,
+		Free
+	};
 	int id;
 	int affiliationId;
 	int partyId;
@@ -20,8 +26,10 @@ public:
 	Point destination;
 	int speed;
 	int sightRange;
+	int attackRange;
 	std::vector<Character*> characterInSight;
 	bool selected;
+	Status status;
 
 	Character(int affiliationId, int partyId);
 	~Character();

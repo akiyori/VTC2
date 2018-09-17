@@ -4,6 +4,7 @@
 #include <cmath>
 #include <math.h>
 #include <string>
+#include <d2d1.h>
 
 class Point
 {
@@ -177,5 +178,9 @@ public:
 
 	const std::string ToString() {
 		return std::to_string((int)x) + ',' + std::to_string((int)y);
+	}
+
+	const D2D1_POINT_2F ToD2D1Point() {
+		return D2D1::Point2F(x, y);
 	}
 };

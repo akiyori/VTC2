@@ -22,24 +22,28 @@ CharacterManager::~CharacterManager()
 
 void CharacterManager::Update(double timeTotal, double timeDelta)
 {
-	{
-		StopWatch<std::chrono::milliseconds> sw("reset map");
 
+	{
+#ifdef _DEBUG
+		StopWatch<std::chrono::milliseconds> sw("reset map");
+#endif
 		for (auto& row : map) {
 			std::fill(row.begin(), row.end(), -1);
 		}
 	}
 	{
+#ifdef _DEBUG
 		StopWatch<std::chrono::milliseconds> sw("create map");
-
+#endif
 		for (size_t i = 0, n = allCharacters.size(); i < n; ++i) {
 			auto* character = allCharacters[i];
 			map[(int)character->position.x][(int)character->position.y] = i;
 		}
 	}
 	{
+#ifdef _DEBUG
 		StopWatch<std::chrono::milliseconds> sw("serch target");
-
+#endif
 		for (Character* character : allCharacters) {
 			if (!character->alive) continue;
 			std::vector<Character*> targetInSight = {};

@@ -5,7 +5,8 @@
 class Input
 {
 public:
-	static Point clickPoint;
+	static Point lClickPoint;
+	static Point rClickPoint;
 	static char inputKey;
 
 	Input();

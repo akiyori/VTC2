@@ -68,4 +68,6 @@ public:
 	void Update(double timeTotal, double timeDelta);
 
 	void Render(Graphics* graphics);
+
+	void AddCharacter(Point postion);
 };

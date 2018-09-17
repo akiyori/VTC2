@@ -56,4 +56,6 @@ public:
 			members.push_back(character);
 		}
 	}
+
+	void AddCharacter(Point position);
 };

@@ -165,15 +165,15 @@ public:
 		return (int)from.x == (int)to.x && (int)from.y == (int)to.y;
 	}
 
-	void FitRange(const Point* start, const Point* end) {
-		if (x < start->x)
-			x = start->x;
-		if (y < start->y)
-			y = start->y;
-		if (x >= end->x)
-			x = end->x-1;
-		if (y >= end->y)
-			y = end->y-1;
+	void FitRange(const Point& start, const Point& end) {
+		if (x < start.x)
+			x = start.x;
+		if (y < start.y)
+			y = start.y;
+		if (x >= end.x)
+			x = end.x-1;
+		if (y >= end.y)
+			y = end.y-1;
 	}
 
 	const std::string ToString() {

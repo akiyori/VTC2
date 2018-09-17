@@ -13,3 +13,8 @@ void Organization::Render(Graphics* graphics)
 		party->Render(graphics);
 	}
 }
+
+void Organization::AddCharacter(Point postion)
+{
+	parties.back()->AddCharacter(postion);
+}
